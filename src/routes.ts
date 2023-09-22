@@ -1,15 +1,12 @@
 import { Router } from "express";
-import { UserController } from "./controllers/usersController";
-import { AuthController } from "./controllers/authController";
+import { AuthController } from "./controllers/AuthController";
 import { Connection } from "./middleware/Connection";
 
+const authController = new AuthController()
+
 const routes = Router()
-const conn = new Connection().conn;
+//const conn = new Connection().conn;
 
-routes.use(conn)
-routes.post('/user/create', conn, new UserController().create)
-//routes.post('/user/login', new UserController().login)
-//routes.get('/teste', new UserController().teste)
-
-routes.get('/auth/profile', new AuthController().getProfile)
+//routes.use(conn)
+//routes.post('/auth/profile', authController.getProfile)
 export default routes

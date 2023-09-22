@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from 'express';
 dotenv.config();
 
 export class Connection {
-  conn(req: Request, res: Response, next: NextFunction) {
+  async conn(req: Request, next: NextFunction) {
     const conn = new Pool({
       user: process.env.DB_USER,
       host: process.env.DB_HOST,

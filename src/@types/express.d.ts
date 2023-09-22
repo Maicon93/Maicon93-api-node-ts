@@ -1,10 +1,14 @@
-import { User } from "../entities/User";
+import { } from "..";
 
 declare global {
   namespace Express {
     export interface Request {
-      user: Partial<User>;
+      user: User;
       conn: Any;
+      headers: {
+        token?: string;
+        user?: string;
+      }
     }
   }
 }
