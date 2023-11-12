@@ -1,11 +1,10 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
-import { NextFunction, Request, Response } from 'express';
 
 dotenv.config();
 
 export class Connection {
-  async conn(req: Request, next: NextFunction) {
+  async conn() {
     const conn = new Pool({
       user: process.env.DB_USER,
       host: process.env.DB_HOST,
@@ -13,7 +12,6 @@ export class Connection {
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
     });
-    req.conn = conn;
-    next()
+    return conn
   }
 }
