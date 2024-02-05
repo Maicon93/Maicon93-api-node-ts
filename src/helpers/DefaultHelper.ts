@@ -2,33 +2,29 @@ import { Connection } from "../middleware/Connection";
 
 export class DefaultHelper {
   async consultSql(sql: string) {
-    return new Promise(async (res, rej) => {
-      try {
-        const conn: Conn = await new Connection().conn()
-        const resp = await conn.query(sql)
+    try {
+      const conn: Conn = await new Connection().conn()
+      const resp = await conn.query(sql)
 
-        res(resp.rows)
-      } catch (error) {
-        rej({ type: 'error', msg: error })
-      }
-    })
+      return resp.rows
+    } catch (error) {
+      return { type: 'error', msg: error }
+    }
   }
 
   async consistSql(sql: string) {
-    return new Promise(async (res, rej) => {
-      try {
-        const conn: Conn = await new Connection().conn()
-        const resp = await conn.query(sql)
-        if (resp.rowCount == 0) {
-          throw new Error('Nenhuma linha afetada')
-        }
-
-        res(resp.rows)
-      } catch (error: any) {
-        const msg = error.message || error
-        rej({ type: 'error', msg: msg })
+    try {
+      const conn: Conn = await new Connection().conn()
+      const resp = await conn.query(sql)
+      if (resp.rowCount == 0) {
+        return { type: 'success', msg: 'Nenhuma linha afetada' }
       }
-    })
+
+      return { type: 'success', rowsAffected: resp.rowCount || 0 }
+    } catch (error: any) {
+      const msg = error.message || error
+      return { type: 'error', msg: msg }
+    }
   }
 
   getActualyDate() {

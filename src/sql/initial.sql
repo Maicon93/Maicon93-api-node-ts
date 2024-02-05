@@ -29,6 +29,18 @@ CREATE TABLE mounths (
   description VARCHAR(20)
 );
 
+create table peoples (
+  id serial primary key,
+  name varchar(100) not null,
+  apelido varchar(100),
+  cpf varchar(11) not null,
+  phone varchar(50) not null,
+  email varchar(100),
+  register_date timestamp,
+  observation varchar(255),
+  deleted boolean not null DEFAULT false
+);
+
 alter table movimentations
 add constraint fk_movimentacoes_credit_card
 foreign key (id_credit_card)

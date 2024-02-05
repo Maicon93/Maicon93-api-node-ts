@@ -5,6 +5,7 @@ import userRoutes from "./routes/userRouters"
 import categoryRoutes from "./routes/categoryRouters"
 import creditCardRoutes from "./routes/creditCardRouters"
 import movimentationRoutes from "./routes/movimentationRouters"
+import clientRouters from "./routes/clientRouters"
 const cors = require('cors');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/user', userRoutes)
 app.use('/category', categoryRoutes)
 app.use('/credit-card', creditCardRoutes)
 app.use('/movimentation', movimentationRoutes)
+app.use('/client', clientRouters)
 
 
 
